@@ -252,6 +252,37 @@ footer a:hover { color:#ff6b6b; }
   </form>
 </section>
 
+<script>
+const contactForm = document.getElementById('contactForm');
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form from submitting normally
+    sendInstagramDM();
+});
+
+function sendInstagramDM() {
+    const name = document.getElementById('name').value.trim();
+    const place = document.getElementById('place').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+
+    if (!name || !place || !whatsapp) {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    const message = `👋 Hey there! I’m ${name} from ${place} 🌴\n📱 WhatsApp: ${whatsapp}\nWould love to connect with you! ✨`;
+
+    // Copy message to clipboard
+    navigator.clipboard.writeText(message).then(() => {
+        alert("Message copied to clipboard! Open Instagram DM and paste it.");
+        // Open Instagram profile
+        window.open("https://www.instagram.com/crafting_axus/", "_blank");
+    }).catch(err => {
+        alert("Failed to copy message. Please copy manually.");
+    });
+}
+</script>
+
 
 
 <section id="about" class="about-section" data-aos="fade-up">
@@ -277,31 +308,7 @@ AOS.init();
 
 
 
-<script>
-function sendInstagramDM() {
-  // Get user input
-  const name = document.getElementById('name').value.trim();
-  const place = document.getElementById('place').value.trim();
-  const whatsapp = document.getElementById('whatsapp').value.trim();
 
-  if (!name || !place || !whatsapp) {
-    alert("Please fill all fields!");
-    return;
-  }
-
-  // Create DM message
-  const message = `👋 Hey there! I’m ${name} from ${place} 🌴\n📱 WhatsApp: ${whatsapp}\nWould love to connect with you! ✨`;
-
-  // Encode message for URL
-  const encodedMessage = encodeURIComponent(message);
-
-  // Instagram DM link
-  const instagramUsername = "crafting_axus";
-  const url = `https://www.instagram.com/direct/new/?text=${encodedMessage}`;
-
-  // Open Instagram DM page in new tab
-  window.open(url, "_blank");
-}
 </script>
 </script>
 </script>
