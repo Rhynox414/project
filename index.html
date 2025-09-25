@@ -240,12 +240,38 @@ footer a:hover { color:#ff6b6b; }
 <script async src="//www.instagram.com/embed.js"></script>
 </section>
 
+
+
 <section id="contact" class="contact-section">
   <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
   <form id="contactForm" data-aos="fade-up" data-aos-delay="200">
     <input type="text" id="name" placeholder="Your Name" required>
     <input type="text" id="place" placeholder="Your Place" required>
-    <input type="text" id="whatsapp" placeholder="WhatsApp Number" required>
+    <input type="text" id="whatsapp" placeholder="Your WhatsApp Number" required>
+    <div class="text-center">
+      <button type="submit">Send 💌</button>
+    </div>
+  </form>
+</section>
+
+<section id="contact" class="contact-section">
+  <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
+  <form id="contactForm" data-aos="fade-up" data-aos-delay="200">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="text" id="place" placeholder="Your Place" required>
+    <input type="text" id="whatsapp" placeholder="Your WhatsApp Number" required>
+    <div class="text-center">
+      <button type="submit">Send 💌</button>
+    </div>
+  </form>
+</section>
+
+<section id="contact" class="contact-section">
+  <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
+  <form id="contactForm" data-aos="fade-up" data-aos-delay="200">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="text" id="place" placeholder="Your Place" required>
+    <input type="text" id="whatsapp" placeholder="Your WhatsApp Number" required>
     <div class="text-center">
       <button type="submit">Send 💌</button>
     </div>
@@ -256,37 +282,53 @@ footer a:hover { color:#ff6b6b; }
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent normal form submission
-    sendInstagramDM();
+    e.preventDefault();
+    shareWhatsAppMessage();
 });
 
-function sendInstagramDM() {
+function shareWhatsAppMessage() {
     const name = document.getElementById('name').value.trim();
     const place = document.getElementById('place').value.trim();
     const whatsapp = document.getElementById('whatsapp').value.trim();
 
     if (!name || !place || !whatsapp) {
-        alert("Please fill all fields!");
+        alert("⚠️ Please fill all fields!");
         return;
     }
 
-    // Instagram username
-    const username = "crafting_axus";
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const date = now.toLocaleDateString(undefined, options);
+    const time = now.toLocaleTimeString();
 
-    // Attempt to open Instagram app
-    const appLink = `instagram://user?username=${username}`;
-    const webLink = `https://www.instagram.com/${username}/`;
+    // WhatsApp-compatible styled message
+    const message = 
+`✨🌟━━━━━━━━━━━━🌟✨
+📩 *New Connection Request* 📩
+✨🌟━━━━━━━━━━━━🌟✨
 
-    // Open Instagram app if installed
-    window.location.href = appLink;
+👤 *Name:* *${name}*
+📍 *Place:* *${place}*
+📱 *WhatsApp:* *${whatsapp}*
 
-    // Fallback to web profile if app is not installed
-    setTimeout(() => {
-        window.open(webLink, "_blank");
-        alert("Instagram app not detected. Opening in browser. Please tap 'Message' to send your DM.");
-    }, 1000);
+🗓 *Date:* _${date}_
+⏰ *Time:* _${time}_
+
+💬 *Message:*
+Hey there! 👋 I would love to connect with you and explore opportunities together. 🚀🤝
+
+🌈 Thank you for your time! Looking forward to your reply. 💫
+
+✨🌟━━━━━━━━━━━━🌟✨`;
+
+    const whatsappShareURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+    window.open(whatsappShareURL, "_blank");
 }
 </script>
+
+
+
+
 
 
 
