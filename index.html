@@ -256,7 +256,7 @@ footer a:hover { color:#ff6b6b; }
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent form from submitting normally
+    e.preventDefault(); // Prevent normal form submission
     sendInstagramDM();
 });
 
@@ -270,18 +270,24 @@ function sendInstagramDM() {
         return;
     }
 
-    const message = `👋 Hey there! I’m ${name} from ${place} 🌴\n📱 WhatsApp: ${whatsapp}\nWould love to connect with you! ✨`;
+    // Instagram username
+    const username = "crafting_axus";
 
-    // Copy message to clipboard
-    navigator.clipboard.writeText(message).then(() => {
-        alert("Message copied to clipboard! Open Instagram DM and paste it.");
-        // Open Instagram profile
-        window.open("https://www.instagram.com/crafting_axus/", "_blank");
-    }).catch(err => {
-        alert("Failed to copy message. Please copy manually.");
-    });
+    // Attempt to open Instagram app
+    const appLink = `instagram://user?username=${username}`;
+    const webLink = `https://www.instagram.com/${username}/`;
+
+    // Open Instagram app if installed
+    window.location.href = appLink;
+
+    // Fallback to web profile if app is not installed
+    setTimeout(() => {
+        window.open(webLink, "_blank");
+        alert("Instagram app not detected. Opening in browser. Please tap 'Message' to send your DM.");
+    }, 1000);
 }
 </script>
+
 
 
 
